@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yadhavi — BCA Cloud Computing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="yadhavi-style.css">
+</head>
+<body>
+
+  <canvas id="petalCanvas"></canvas>
+  <div class="aurora">
+    <div class="aurora-blob"></div>
+    <div class="aurora-blob"></div>
+    <div class="aurora-blob"></div>
+  </div>
+  <div class="scanlines"></div>
+  <div id="progress"></div>
+
+  <!-- PDF Modal -->
+  <div id="pdfModal">
+    <div class="pdf-modal-inner">
+      <div class="pdf-modal-header">
+        <span id="pdfModalTitle">✦ CERTIFICATE VIEWER</span>
+        <button class="pdf-close">✕ CLOSE</button>
+      </div>
+      <iframe id="pdfFrame" src=""></iframe>
+    </div>
+  </div>
+
+  <!-- NAV — logo left, links center, cta right -->
+  <nav>
+    <div class="logo"><em>Y</em><span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certs">Certs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta"><a href="#contact">Say Hello ✦</a></div>
+  </nav>
+
+  <main>
+
+    <!-- HERO — centered -->
+    <section id="hero">
+      <!-- Floating ambient badges -->
+      <div class="hero-badges">
+        <div class="hero-badge">☁️ Cloud Computing</div>
+        <div class="hero-badge">🌸 1st Year BCA</div>
+        <div class="hero-badge">✦ 8 Certificates</div>
+        <div class="hero-badge">💻 Frontend Dev</div>
+      </div>
+
+      <div class="hero-eyebrow">BCA Cloud Computing · 1st Year</div>
+      <h1 class="hero-name">Yadhavi</h1>
+      <div class="hero-divider"><span>Student · Developer · Creator</span></div>
+      <p class="hero-desc">First-year BCA Cloud Computing student passionate about building beautiful things on the web and understanding the cloud infrastructure that powers them. Learning, growing, creating every day.</p>
+      <div class="hero-btns">
+        <a href="#certs" class="btn btn-primary">✦ View Certificates</a>
+        <a href="#contact" class="btn btn-ghost">Say Hello →</a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-tag">01 · About</div>
+      <h2 class="section-title">Who am <em>I?</em></h2>
+
+      <div class="about-layout">
+
+        <div class="about-intro">
+          <p>Hi, I'm Yadhavi — a 1st year BCA Cloud Computing student who loves the intersection of creativity and technology. Building things on the web and understanding the infrastructure behind them is what drives me.</p>
+          <p>Currently diving into cloud technology, web development, and programming as part of my BCA journey. I believe great things are built one line of code at a time.</p>
+          <p>Outside of studies I enjoy working on personal projects, earning certifications, and levelling up my skills every single day.</p>
+        </div>
+
+        <div class="about-photo-box">
+          <div class="about-avatar">
+            <!-- 📝 REPLACE: put Yadhavi's photo named "profile.jpg" in the same folder as index.html -->
+            <img src="profile.jpg" alt="Yadhavi" id="profileImg"
+              onerror="this.style.display='none';document.getElementById('profileFallback').style.display='flex'">
+            <div id="profileFallback" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:3rem;">🌸</div>
+          </div>
+          <h3>Yadhavi</h3>
+          <!-- 📝 Update course/college details -->
+          <p>BCA Cloud Computing</p>
+        </div>
+
+        <div class="about-stats-row">
+          <div class="stat-card">
+            <div class="stat-num">1st</div>
+            <div class="stat-label">Year BCA</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">8</div>
+            <div class="stat-label">Certificates</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">6+</div>
+            <div class="stat-label">Tech Skills</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">7</div>
+            <div class="stat-label">Languages</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-tag">02 · Skills</div>
+      <h2 class="section-title">What I <em>Know</em></h2>
+
+      <div class="skills-layout">
+        <div>
+          <div class="skills-col-label">Web & Tech Skills</div>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <div class="skill-icon">🌐</div>
+              <div class="skill-name">HTML</div>
+              <div class="skill-level">Intermediate</div>
+              <div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-icon">🎨</div>
+              <div class="skill-name">CSS</div>
+              <div class="skill-level">Intermediate</div>
+              <div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-icon">🟢</div>
+              <div class="skill-name">Node.js</div>
+              <div class="skill-level">Learning</div>
+              <div class="skill-bar-wrap"><div class="skill-bar" style="width:35%"></div></div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-icon">🔀</div>
+              <div class="skill-name">Git</div>
+              <div class="skill-level">Learning</div>
+              <div class="skill-bar-wrap"><div class="skill-bar" style="width:40%"></div></div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-icon">💻</div>
+              <div class="skill-name">Front-End</div>
+              <div class="skill-level">Intermediate</div>
+              <div class="skill-bar-wrap"><div class="skill-bar" style="width:60%"></div></div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-icon">☁️</div>
+              <div class="skill-name">Cloud</div>
+              <div class="skill-level">Learning</div>
+              <div class="skill-bar-wrap"><div class="skill-bar" style="width:30%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="skills-col-label">Programming Languages</div>
+          <div class="lang-list">
+            <div class="lang-item">
+              <div class="lang-left"><div class="lang-icon">☕</div><div class="lang-name">Java</div></div>
+              <div class="lang-lvl">Beginner</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-left"><div class="lang-icon">🐍</div><div class="lang-name">Python</div></div>
+              <div class="lang-lvl">Beginner</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-left"><div class="lang-icon">🐚</div><div class="lang-name">Shell Script</div></div>
+              <div class="lang-lvl">Beginner</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-left"><div class="lang-icon">⚡</div><div class="lang-name">C++</div></div>
+              <div class="lang-lvl">Beginner</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-left"><div class="lang-icon">🌐</div><div class="lang-name">HTML</div></div>
+              <div class="lang-lvl">Intermediate</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-left"><div class="lang-icon">🎨</div><div class="lang-name">CSS</div></div>
+              <div class="lang-lvl">Intermediate</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-left"><div class="lang-icon">🟡</div><div class="lang-name">JavaScript</div></div>
+              <div class="lang-lvl">Beginner</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTS — horizontal scrolling row -->
+    <section id="certs">
+      <div class="section-tag">03 · Certificates</div>
+      <h2 class="section-title">My <em>Achievements</em></h2>
+
+      <div class="certs-scroll-wrap">
+        <div class="certs-row">
+
+          <div class="cert-card">
+            <div class="cert-num">01</div>
+            <div class="cert-badge">🌐</div>
+            <div class="cert-issuer">Web Development</div>
+            <div class="cert-name">HTML Essentials</div>
+            <div class="cert-date">📄 html.pdf</div>
+            <button class="cert-pdf-btn" data-action="view" data-idx="0">✦ View →</button>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-num">02</div>
+            <div class="cert-badge">🎨</div>
+            <div class="cert-issuer">Web Development</div>
+            <div class="cert-name">CSS Styling &amp; Design</div>
+            <div class="cert-date">📄 css.pdf</div>
+            <button class="cert-pdf-btn" data-action="view" data-idx="1">✦ View →</button>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-num">03</div>
+            <div class="cert-badge">💻</div>
+            <div class="cert-issuer">Web Development</div>
+            <div class="cert-name">Front-End Web Developer</div>
+            <div class="cert-date">📄 frontend.pdf</div>
+            <button class="cert-pdf-btn" data-action="view" data-idx="2">✦ View →</button>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-num">04</div>
+            <div class="cert-badge">⚙️</div>
+            <div class="cert-issuer">Engineering</div>
+            <div class="cert-name">Digital Engineering Languages</div>
+            <div class="cert-date">📄 digital.pdf</div>
+            <button class="cert-pdf-btn" data-action="view" data-idx="3">✦ View →</button>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-num">05</div>
+            <div class="cert-badge">☁️</div>
+            <div class="cert-issuer">Amazon Web Services</div>
+            <div class="cert-name">AWS Cloud Practitioner</div>
+            <div class="cert-date">📄 aws.pdf</div>
+            <button class="cert-pdf-btn" data-action="view" data-idx="4">✦ View →</button>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-num">06</div>
+            <div class="cert-badge">⚡</div>
+            <div class="cert-issuer">Web Development</div>
+            <div class="cert-name">JavaScript Essentials</div>
+            <div class="cert-date">📄 js.pdf</div>
+            <button class="cert-pdf-btn" data-action="view" data-idx="5">✦ View →</button>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-num">07</div>
+            <div class="cert-badge">🔀</div>
+            <div class="cert-issuer">Version Control</div>
+            <div class="cert-name">Git &amp; Version Control</div>
+            <div class="cert-date">📄 git.pdf</div>
+            <button class="cert-pdf-btn" data-action="view" data-idx="6">✦ View →</button>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-num">08</div>
+            <div class="cert-badge">🟢</div>
+            <div class="cert-issuer">Backend Development</div>
+            <div class="cert-name">Node.js Fundamentals</div>
+            <div class="cert-date">📄 nodejs.pdf</div>
+            <button class="cert-pdf-btn" data-action="view" data-idx="7">✦ View →</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT — split layout, no inner padding section -->
+    <section id="contact" style="padding:0;">
+      <div class="contact-banner">
+        <div class="section-tag">04 · Contact</div>
+        <h2 class="section-title">Say <em>Hello</em></h2>
+        <p>Whether you're a recruiter, professor, fellow student, or just curious — drop me a message. Every message goes straight into my database so I never miss it.</p>
+        <div class="contact-links">
+          <!-- 📝 REPLACE with Yadhavi's actual details -->
+          <a href="mailto:yadhavi@email.com" class="contact-link">
+            <div class="contact-link-icon">✉</div>yadhavi@email.com
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="contact-link">
+            <div class="contact-link-icon">in</div>linkedin.com/in/yadhavi
+          </a>
+          <a href="https://github.com" target="_blank" class="contact-link">
+            <div class="contact-link-icon">⌥</div>github.com/yadhavi
+          </a>
+          <a href="#" class="contact-link">
+            <div class="contact-link-icon">📍</div>India
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form-side">
+        <div class="form-title">Send a message ✦</div>
+        <div id="pingForm">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="pName" placeholder="Your full name" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="pEmail" placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea id="pMsg" rows="5" placeholder="What's on your mind?"></textarea>
+          </div>
+          <button class="submit-btn" id="pingBtn" onclick="sendPing()">
+            <span id="pingBtnText">✦ Send Message</span>
+            <div class="btn-spinner" id="pingSpinner"></div>
+          </button>
+          <div class="form-err" id="pingErr"></div>
+        </div>
+        <div class="form-success" id="pingSuccess">
+          <span class="s-icon">🌸</span>
+          <h4>Message Received!</h4>
+          <p>Your message has been saved.<br>Yadhavi will get back to you soon!</p>
+          <p class="ts" id="pingTs"></p>
+          <button class="reset-btn" onclick="resetPing()">✦ Send Another</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div>© 2026 YADHAVI · BCA CLOUD COMPUTING</div>
+    <div class="footer-right"><span class="footer-dot"></span>MADE WITH ✦ IN INDIA</div>
+  </footer>
+
+  <script src="yadhavi-script.js"></script>
+</body>
+</html>
