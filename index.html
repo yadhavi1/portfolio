@@ -5,340 +5,601 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yadhavi — BCA Cloud Computing</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <style>
+    /* BLUE AESTHETIC THEME - Sapphire Blue Palette */
+    :root {
+      --blue-primary: #1e3a8a;
+      --blue-secondary: #3b82f6;
+      --blue-light: #60a5fa;
+      --blue-ultra: #dbeafe;
+      --blue-dark: #1e1b4b;
+      --blue-glass: rgba(59, 130, 246, 0.1);
+      --gradient-blue: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+      --gradient-glass: linear-gradient(145deg, rgba(59, 130, 246, 0.2), rgba(30, 58, 138, 0.3));
+      --shadow-blue: 0 25px 50px -12px rgba(30, 58, 138, 0.4);
+      --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.3);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --bg-primary: #0f172a;
+      --glass-bg: rgba(15, 23, 42, 0.6);
+    }
 
-  <canvas id="petalCanvas"></canvas>
-  <div class="aurora">
-    <div class="aurora-blob"></div>
-    <div class="aurora-blob"></div>
-    <div class="aurora-blob"></div>
-  </div>
-  <div class="scanlines"></div>
-  <div id="progress"></div>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  <!-- PDF Modal -->
-  <div id="pdfModal">
-    <div class="pdf-modal-inner">
-      <div class="pdf-modal-header">
-        <span id="pdfModalTitle">✦ CERTIFICATE VIEWER</span>
-        <button class="pdf-close">✕ CLOSE</button>
-      </div>
-      <iframe id="pdfFrame" src=""></iframe>
-    </div>
-  </div>
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-  <!-- NAV — logo left, links center, cta right -->
-  <nav>
-    <div class="logo"><em>Y</em><span>.</span></div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#certs">Certs</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nav-cta"><a href="#contact">Say Hello ✦</a></div>
-  </nav>
+    /* Canvas Petals - Blue themed */
+    #petalCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-  <main>
+    /* Aurora Blobs - Blue gradient */
+    .aurora {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
 
-    <!-- HERO — centered -->
-    <section id="hero">
-      <!-- Floating ambient badges -->
-      <div class="hero-badges">
-        <div class="hero-badge">☁️ Cloud Computing</div>
-        <div class="hero-badge">🌸 1st Year BCA</div>
-        <div class="hero-badge">✦ 8 Certificates</div>
-        <div class="hero-badge">💻 Frontend Dev</div>
-      </div>
+    .aurora-blob {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--gradient-blue);
+      filter: blur(80px);
+      opacity: 0.3;
+      animation: float 20s ease-in-out infinite;
+    }
 
-      <div class="hero-eyebrow">BCA Cloud Computing · 1st Year</div>
-      <h1 class="hero-name">Yadhavi</h1>
-      <div class="hero-divider"><span>Student · Developer · Creator</span></div>
-      <p class="hero-desc">First-year BCA Cloud Computing student passionate about building beautiful things on the web and understanding the cloud infrastructure that powers them. Learning, growing, creating every day.</p>
-      <div class="hero-btns">
-        <a href="#certs" class="btn btn-primary">✦ View Certificates</a>
-        <a href="#contact" class="btn btn-ghost">Say Hello →</a>
-      </div>
-    </section>
+    .aurora-blob:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
 
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="section-tag">01 · About</div>
-      <h2 class="section-title">Who am <em>I?</em></h2>
+    .aurora-blob:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      top: 60%;
+      right: 10%;
+      animation-delay: -10s;
+    }
 
-      <div class="about-layout">
+    .aurora-blob:nth-child(3) {
+      width: 250px;
+      height: 250px;
+      top: 10%;
+      right: 20%;
+      animation-delay: -5s;
+    }
 
-        <div class="about-intro">
-          <p>Hi, I'm Yadhavi — a 1st year BCA Cloud Computing student who loves the intersection of creativity and technology. Building things on the web and understanding the infrastructure behind them is what drives me.</p>
-          <p>Currently diving into cloud technology, web development, and programming as part of my BCA journey. I believe great things are built one line of code at a time.</p>
-          <p>Outside of studies I enjoy working on personal projects, earning certifications, and levelling up my skills every single day.</p>
-        </div>
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-30px) rotate(120deg); }
+      66% { transform: translateY(20px) rotate(240deg); }
+    }
 
-        <div class="about-photo-box">
-          <div class="about-avatar">
-            <!-- 📝 REPLACE: put Yadhavi's photo named "profile.jpg" in the same folder as index.html -->
-            <img src="profile.jpg" alt="Yadhavi" id="profileImg"
-              onerror="this.style.display='none';document.getElementById('profileFallback').style.display='flex'">
-            <div id="profileFallback" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:3rem;">🌸</div>
-          </div>
-          <h3>Yadhavi</h3>
-          <!-- 📝 Update course/college details -->
-          <p>BCA Cloud Computing</p>
-        </div>
+    /* Scanlines */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+      background-size: 100% 4px, 4px 100%;
+      z-index: 2;
+      pointer-events: none;
+      animation: scan 20s linear infinite;
+    }
 
-        <div class="about-stats-row">
-          <div class="stat-card">
-            <div class="stat-num">1st</div>
-            <div class="stat-label">Year BCA</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">8</div>
-            <div class="stat-label">Certificates</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">6+</div>
-            <div class="stat-label">Tech Skills</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">7</div>
-            <div class="stat-label">Languages</div>
-          </div>
-        </div>
+    @keyframes scan {
+      0% { background-position: 0 0, 0 0; }
+      100% { background-position: 0 100%, 100% 0; }
+    }
 
-      </div>
-    </section>
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      background: var(--glass-bg);
+      border-bottom: 1px solid var(--blue-glass);
+      z-index: 1000;
+    }
 
-    <!-- SKILLS -->
-    <section id="skills">
-      <div class="section-tag">02 · Skills</div>
-      <h2 class="section-title">What I <em>Know</em></h2>
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      background: var(--gradient-blue);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-      <div class="skills-layout">
-        <div>
-          <div class="skills-col-label">Web & Tech Skills</div>
-          <div class="skills-grid">
-            <div class="skill-card">
-              <div class="skill-icon">🌐</div>
-              <div class="skill-name">HTML</div>
-              <div class="skill-level">Intermediate</div>
-              <div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div>
-            </div>
-            <div class="skill-card">
-              <div class="skill-icon">🎨</div>
-              <div class="skill-name">CSS</div>
-              <div class="skill-level">Intermediate</div>
-              <div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div>
-            </div>
-            <div class="skill-card">
-              <div class="skill-icon">🟢</div>
-              <div class="skill-name">Node.js</div>
-              <div class="skill-level">Learning</div>
-              <div class="skill-bar-wrap"><div class="skill-bar" style="width:35%"></div></div>
-            </div>
-            <div class="skill-card">
-              <div class="skill-icon">🔀</div>
-              <div class="skill-name">Git</div>
-              <div class="skill-level">Learning</div>
-              <div class="skill-bar-wrap"><div class="skill-bar" style="width:40%"></div></div>
-            </div>
-            <div class="skill-card">
-              <div class="skill-icon">💻</div>
-              <div class="skill-name">Front-End</div>
-              <div class="skill-level">Intermediate</div>
-              <div class="skill-bar-wrap"><div class="skill-bar" style="width:60%"></div></div>
-            </div>
-            <div class="skill-card">
-              <div class="skill-icon">☁️</div>
-              <div class="skill-name">Cloud</div>
-              <div class="skill-level">Learning</div>
-              <div class="skill-bar-wrap"><div class="skill-bar" style="width:30%"></div></div>
-            </div>
-          </div>
-        </div>
+    .logo em { font-style: normal; color: var(--blue-light); }
 
-        <div>
-          <div class="skills-col-label">Programming Languages</div>
-          <div class="lang-list">
-            <div class="lang-item">
-              <div class="lang-left"><div class="lang-icon">☕</div><div class="lang-name">Java</div></div>
-              <div class="lang-lvl">Beginner</div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-left"><div class="lang-icon">🐍</div><div class="lang-name">Python</div></div>
-              <div class="lang-lvl">Beginner</div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-left"><div class="lang-icon">🐚</div><div class="lang-name">Shell Script</div></div>
-              <div class="lang-lvl">Beginner</div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-left"><div class="lang-icon">⚡</div><div class="lang-name">C++</div></div>
-              <div class="lang-lvl">Beginner</div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-left"><div class="lang-icon">🌐</div><div class="lang-name">HTML</div></div>
-              <div class="lang-lvl">Intermediate</div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-left"><div class="lang-icon">🎨</div><div class="lang-name">CSS</div></div>
-              <div class="lang-lvl">Intermediate</div>
-            </div>
-            <div class="lang-item">
-              <div class="lang-left"><div class="lang-icon">🟡</div><div class="lang-name">JavaScript</div></div>
-              <div class="lang-lvl">Beginner</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
 
-    <!-- CERTS — horizontal scrolling row -->
-    <section id="certs">
-      <div class="section-tag">03 · Certificates</div>
-      <h2 class="section-title">My <em>Achievements</em></h2>
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 400;
+      position: relative;
+      transition: all 0.3s ease;
+    }
 
-      <div class="certs-scroll-wrap">
-        <div class="certs-row">
+    .nav-links a:hover {
+      color: var(--blue-light);
+      text-shadow: 0 0 10px var(--blue-light);
+    }
 
-          <div class="cert-card">
-            <div class="cert-num">01</div>
-            <div class="cert-badge">🌐</div>
-            <div class="cert-issuer">Web Development</div>
-            <div class="cert-name">HTML Essentials</div>
-            <div class="cert-date">📄 html.pdf</div>
-            <button class="cert-pdf-btn" data-action="view" data-idx="0">✦ View →</button>
-          </div>
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: var(--gradient-blue);
+      transition: width 0.3s ease;
+    }
 
-          <div class="cert-card">
-            <div class="cert-num">02</div>
-            <div class="cert-badge">🎨</div>
-            <div class="cert-issuer">Web Development</div>
-            <div class="cert-name">CSS Styling &amp; Design</div>
-            <div class="cert-date">📄 css.pdf</div>
-            <button class="cert-pdf-btn" data-action="view" data-idx="1">✦ View →</button>
-          </div>
+    .nav-links a:hover::after { width: 100%; }
 
-          <div class="cert-card">
-            <div class="cert-num">03</div>
-            <div class="cert-badge">💻</div>
-            <div class="cert-issuer">Web Development</div>
-            <div class="cert-name">Front-End Web Developer</div>
-            <div class="cert-date">📄 frontend.pdf</div>
-            <button class="cert-pdf-btn" data-action="view" data-idx="2">✦ View →</button>
-          </div>
+    .nav-cta a {
+      background: var(--gradient-blue);
+      color: white;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: var(--shadow-blue);
+      transition: all 0.3s ease;
+    }
 
-          <div class="cert-card">
-            <div class="cert-num">04</div>
-            <div class="cert-badge">⚙️</div>
-            <div class="cert-issuer">Engineering</div>
-            <div class="cert-name">Digital Engineering Languages</div>
-            <div class="cert-date">📄 digital.pdf</div>
-            <button class="cert-pdf-btn" data-action="view" data-idx="3">✦ View →</button>
-          </div>
+    .nav-cta a:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
 
-          <div class="cert-card">
-            <div class="cert-num">05</div>
-            <div class="cert-badge">☁️</div>
-            <div class="cert-issuer">Amazon Web Services</div>
-            <div class="cert-name">AWS Cloud Practitioner</div>
-            <div class="cert-date">📄 aws.pdf</div>
-            <button class="cert-pdf-btn" data-action="view" data-idx="4">✦ View →</button>
-          </div>
+    /* Main Content */
+    main { margin-top: 100px; position: relative; z-index: 10; }
 
-          <div class="cert-card">
-            <div class="cert-num">06</div>
-            <div class="cert-badge">⚡</div>
-            <div class="cert-issuer">Web Development</div>
-            <div class="cert-name">JavaScript Essentials</div>
-            <div class="cert-date">📄 js.pdf</div>
-            <button class="cert-pdf-btn" data-action="view" data-idx="5">✦ View →</button>
-          </div>
+    /* Section Tag */
+    .section-tag {
+      font-size: 0.9rem;
+      color: var(--blue-light);
+      font-weight: 500;
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
 
-          <div class="cert-card">
-            <div class="cert-num">07</div>
-            <div class="cert-badge">🔀</div>
-            <div class="cert-issuer">Version Control</div>
-            <div class="cert-name">Git &amp; Version Control</div>
-            <div class="cert-date">📄 git.pdf</div>
-            <button class="cert-pdf-btn" data-action="view" data-idx="6">✦ View →</button>
-          </div>
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      margin-bottom: 2rem;
+      line-height: 1.1;
+    }
 
-          <div class="cert-card">
-            <div class="cert-num">08</div>
-            <div class="cert-badge">🟢</div>
-            <div class="cert-issuer">Backend Development</div>
-            <div class="cert-name">Node.js Fundamentals</div>
-            <div class="cert-date">📄 nodejs.pdf</div>
-            <button class="cert-pdf-btn" data-action="view" data-idx="7">✦ View →</button>
-          </div>
+    .section-title em {
+      background: var(--gradient-blue);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-        </div>
-      </div>
-    </section>
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-    <!-- CONTACT — split layout, no inner padding section -->
-    <section id="contact" style="padding:0;">
-      <div class="contact-banner">
-        <div class="section-tag">04 · Contact</div>
-        <h2 class="section-title">Say <em>Hello</em></h2>
-        <p>Whether you're a recruiter, professor, fellow student, or just curious — drop me a message. Every message goes straight into my database so I never miss it.</p>
-        <div class="contact-links">
-          <!-- 📝 REPLACE with Yadhavi's actual details -->
-          <a href="mailto:yadhavi@email.com" class="contact-link">
-            <div class="contact-link-icon">✉</div>yadhavi@email.com
-          </a>
-          <a href="https://linkedin.com" target="_blank" class="contact-link">
-            <div class="contact-link-icon">in</div>linkedin.com/in/yadhavi
-          </a>
-          <a href="https://github.com" target="_blank" class="contact-link">
-            <div class="contact-link-icon">⌥</div>github.com/yadhavi
-          </a>
-          <a href="#" class="contact-link">
-            <div class="contact-link-icon">📍</div>India
-          </a>
-        </div>
-      </div>
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
 
-      <div class="contact-form-side">
-        <div class="form-title">Send a message ✦</div>
-        <div id="pingForm">
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" id="pName" placeholder="Your full name" />
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" id="pEmail" placeholder="your@email.com" />
-          </div>
-          <div class="form-group">
-            <label>Message</label>
-            <textarea id="pMsg" rows="5" placeholder="What's on your mind?"></textarea>
-          </div>
-          <button class="submit-btn" id="pingBtn" onclick="sendPing()">
-            <span id="pingBtnText">✦ Send Message</span>
-            <div class="btn-spinner" id="pingSpinner"></div>
-          </button>
-          <div class="form-err" id="pingErr"></div>
-        </div>
-        <div class="form-success" id="pingSuccess">
-          <span class="s-icon">🌸</span>
-          <h4>Message Received!</h4>
-          <p>Your message has been saved.<br>Yadhavi will get back to you soon!</p>
-          <p class="ts" id="pingTs"></p>
-          <button class="reset-btn" onclick="resetPing()">✦ Send Another</button>
-        </div>
-      </div>
-    </section>
+    .hero-badge {
+      background: var(--gradient-glass);
+      backdrop-filter: blur(10px);
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      border: 1px solid var(--blue-glass);
+      box-shadow: var(--shadow-blue);
+      animation: badgeFloat 6s ease-in-out infinite;
+    }
 
-  </main>
+    .hero-badge:nth-child(1) { animation-delay: 0s; }
+    .hero-badge:nth-child(2) { animation-delay: -2s; }
+    .hero-badge:nth-child(3) { animation-delay: -4s; }
+    .hero-badge:nth-child(4) { animation-delay: -1s; }
 
-  <footer>
-    <div>© 2026 YADHAVI · BCA CLOUD COMPUTING</div>
-    <div class="footer-right"><span class="footer-dot"></span>MADE WITH ✦ IN INDIA</div>
-  </footer>
+    @keyframes badgeFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
-  <script src="script.js"></script>
-</body>
-</html>
+    .hero-eyebrow {
+      color: var(--blue-light);
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 10vw, 8rem);
+      font-weight: 300;
+      margin-bottom: 1rem;
+      background: var(--gradient-blue);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-divider {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    .hero-divider span {
+      background: var(--gradient-glass);
+      padding: 0.5rem 2rem;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--blue-glass);
+    }
+
+    .hero-desc {
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      margin: 0 1rem 1rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--gradient-blue);
+      color: white;
+      box-shadow: var(--shadow-blue);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--blue-light);
+      border: 2px solid var(--blue-glass);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-ghost:hover {
+      background: var(--blue-glass);
+      transform: translateY(-2px);
+    }
+
+    /* ABOUT */
+    #about {
+      padding: 120px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-intro {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .about-intro p { margin-bottom: 1.5rem; }
+
+    .about-photo-box {
+      text-align: center;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      padding: 3rem 2rem;
+      border-radius: 24px;
+      border: 1px solid var(--blue-glass);
+      box-shadow: var(--shadow-blue);
+    }
+
+    .about-avatar {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--blue-glass);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .about-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-photo-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      background: var(--gradient-blue);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .about-photo-box p {
+      color: var(--blue-light);
+      font-weight: 500;
+    }
+
+    .about-stats-row {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--gradient-glass);
+      backdrop-filter: blur(15px);
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid var(--blue-glass);
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .stat-num {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--gradient-blue);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 400;
+    }
+
+    /* SKILLS */
+    #skills {
+      padding: 120px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .skills-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .skills-col-label {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--blue-light);
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid var(--blue-glass);
+      transition: all 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-glow);
+      border-color: var(--blue-light);
+    }
+
+    .skill-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .skill-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .skill-level {
+      color: var(--blue-light);
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .skill-bar-wrap {
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .skill-bar {
+      height: 100%;
+      background: var(--gradient-blue);
+      border-radius: 3px;
+      transition: width 2s ease;
+      box-shadow: 0 0 10px var(--blue-light);
+    }
+
+    .lang-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .lang-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      padding: 1.5rem;
+      border-radius: 16px;
+      border: 1px solid var(--blue-glass);
+      transition: all 0.3s ease;
+    }
+
+    .lang-item:hover {
+      transform: translateX(10px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .lang-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .lang-icon { font-size: 1.8rem; }
+
+    .lang-name {
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .lang-lvl {
+      color: var(--blue-light);
+      font-weight: 500;
+      padding: 0.25rem 1rem;
+      background: var(--gradient-glass);
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+
+    /* CERTIFICATES */
+    #certs {
+      padding: 120px 5%;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .certs-scroll-wrap {
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .certs-scroll-wrap::-webkit-scrollbar { display: none; }
+
+    .certs-row {
+      display: flex;
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+
+    .cert-card {
+      flex: 0 0 320px;
+      background: var(--gradient-glass);
+      backdrop-filter: blur(20px);
+      padding: 2.5rem 2rem;
+      border-radius: 24px;
+      border: 1px solid var(--blue-glass);
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow:
