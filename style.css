@@ -478,7 +478,7 @@ section { padding: 100px 70px; }
 .contact-banner::before {
   content: '✦';
   position: absolute; font-size: 20rem; line-height: 1;
-  color: rgba(232,130,154,0.03);
+  color: rgba(130, 232, 152, 0.03);
   top: 50%; left: 50%; transform: translate(-50%,-50%);
   pointer-events: none;
 }
@@ -507,7 +507,7 @@ section { padding: 100px 70px; }
   font-size: 0.6rem; color: var(--gold); letter-spacing: 2px;
   margin-top: 24px; padding: 6px 14px;
   background: rgba(212,175,122,0.05);
-  border: 1px solid rgba(212,175,122,0.2);
+  border: 1px solid rgba(20, 54, 81, 0.2);
 }
 .sb-live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: blink 2s infinite; }
 
